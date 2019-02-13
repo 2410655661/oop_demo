@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="box"></div>
+    <script>
+      var obj = {};
+      var oBox = document.getElementById("box");
+      Object.defineProperty(obj, "message", {
+        set: function(e) {
+          oBox.innerHTML = e;
+        },
+        get: function() {
+          return oBox.innerHTML;
+        },
+        configurable: true,
+        enumerable: true
+      });
+
+      obj.message = "刘";
+    </script>
+  </body>
+</html>

@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //   var obj = {
+      //     name: "张三"
+      //   };
+
+      //   Object.defineProperties(obj, {
+      //     age: { value: 20, writeable: true },
+      //     job: { value: "it", writeable: true }
+      //   });
+      //   console.log(obj);
+
+      var obj = {
+        name: "张三"
+      };
+
+      Object.defineProperties(obj, {
+        age: { value: 20, writable: true },
+        job: { value: 21, writable: true }
+      });
+
+      console.log(Object.getOwnPropertyDescriptors(obj, "age"));
+
+      function Foo() {
+        this.name = "张三";
+      }
+      Foo.prototype.age = 20;
+
+      var f = new Foo();
+      console.log(Object.getOwnPropertyDescriptors(f));
+    </script>
+  </body>
+</html>

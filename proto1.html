@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 拷贝继承
+      //   function Foo() {
+      //     this.name = "张三";
+      //   }
+      //   Foo.prototype.showName = function() {
+      //     console.log(this.name);
+      //   };
+      //   function Bar() {
+      //     Foo.call(this);
+      //     this.age = 21;
+      //   }
+      //   Bar.prototype.showAge = function() {
+      //     console.log(this.age);
+      //   };
+
+      //   function extend(subs, sups) {
+      //     for (var attr in sups.prototype) {
+      //       subs.prototype[attr] = sups.prototype[attr];
+      //     }
+      //   }
+
+      //   extend(Bar, Foo);
+      //   var F = new Foo();
+      //   var B = new Bar();
+
+      //   console.log(F, B);
+
+      //   类式继承
+      //   function Foo() {
+      //     this.name = "张三";
+      //   }
+      //   Foo.prototype.showName = function() {
+      //     console.log(this.name);
+      //   };
+      //   function Bar() {
+      //     Foo.call(this);
+      //     this.age = 21;
+      //   }
+      //   extend(Bar, Foo);
+
+      //   Bar.prototype.showAge = function() {
+      //     console.log(this.age);
+      //   };
+
+      //   function extend(subs, sups) {
+      //     var F = function() {};
+      //     F.prototype = sups.prototype;
+      //     subs.prototype = new F();
+      //     subs.prototype.constructor = subs;
+      //   }
+
+      //   var b = new Bar();
+      //   var f = new Foo();
+
+      //   b.showAge();
+      //   b.showName();
+      //   console.log(f, b);
+
+      //   非构造函数继承
+
+      var foo = {
+        name: "张三"
+      };
+      var bar = extend(foo);
+      function extend(subs) {
+        var F = function() {};
+        F.prototype = subs;
+        return new F();
+      }
+      console.log(bar);
+      bar.name = "李四";
+      
+    </script>
+  </body>
+</html>

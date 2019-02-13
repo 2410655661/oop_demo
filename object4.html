@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+    
+    
+      var obj={
+        name:'张三',
+        age:20
+    }
+    Object.defineProperties(obj,{
+          sex:{
+              value:'女',
+            enumerable:false
+          }
+      })
+    //   返回自身属性的数组 获取不到原型上的属性以及不可枚举的属性
+    console.log(Object.keys(obj));
+    //   返回自身属性的值的数组 获取不到原型上的属性的值以及不可枚举的属性的值
+    console.log(Object.values(obj));
+    //    //   返回自身属性以及值的复合数组 获取不到原型上的属性的值以及不可枚举的属性的值
+    console.log(Object.entries(obj));
+    // 返回自身属性的数组 获取不到原型上的属性  跟Object.keys(obj)区别是可以获取到不可枚举的属性
+    console.log(Object.getOwnPropertyNames(obj))
+    
+    </script>
+    
+</body>
+</html>
