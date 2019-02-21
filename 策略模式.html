@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <input type="text" id="input1" />
+    <button id="btn">注册</button>
+    <script>
+      /* 策略模式 :
+        将操作封装成一个个的策略,根据不同的类型映射到不同的策略
+         */
+      /*  function Foo() {}
+      function Bar() {}
+      function Baz() {}
+      Foo.prototype.print = function() {
+        console.log("foo");
+      };
+      Bar.prototype.print = function() {
+        console.log("策略一");
+      };
+      Baz.prototype.print = function() {
+        console.log("策略二");
+      };
+      Foo.prototype.show = function(obj) {
+        obj.print();
+      };
+      var f = new Foo();
+      f.show(new Bar());
+      f.show(new Baz()); */
+
+      //   demo
+
+      function AddValidata(id, opts) {
+        this.elem = document.getElementById(id);
+        this.opts = opts;
+      }
+
+      var validataList = {
+        notNull: function(value, bool) {
+          return (value !== "") == bool;
+        },
+        maxLength: function(value, maxLength) {
+          return value.length < maxLength;
+        }
+      };
+      AddValidata.prototype.isPass = function() {
+        for (var attr in this.opts) {
+          if (!validataList[attr](this.elem.value, this.opts[attr])) {
+            return "注册失败";
+          }
+        }
+        return "注册成功";
+      };
+
+      var v1 = new AddValidata("input1", { notNull: true, maxLength: 10 }); //根据输入的策略不同,执行不同的策略
+      var btn = document.getElementById("btn");
+      btn.onclick = function() {
+        console.log(v1.isPass());
+      };
+    </script>
+  </body>
+</html>

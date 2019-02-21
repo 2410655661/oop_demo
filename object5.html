@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //1. Object.assign
+      /*     function Foo(){
+            this.name='hello';
+            this.age=20;
+        }
+        Foo.prototype.sex="男";
+
+        var obj=new Foo();
+        Object.defineProperty(obj,'job',{
+            value:'it'
+        })
+
+        obj.work={
+            time:8
+        };
+        var newObj={};
+
+        Object.assign(newObj,obj);  //浅拷贝 原型链上的属性和不可枚举的属性都不能拷贝
+
+        console.log(newObj);   //此时newObj={age: 20,name: "hello",work: {time: 8}}; obj的job与sex都没有拷贝下来
+
+        newObj.age=30;
+        newObj.work.time=9;
+        console.log(newObj.age,obj.age);        // 30  20 浅拷贝
+        console.log(newObj.work.time,obj.work.time);  //9  9  因为只能浅拷贝 所以newObj.work.time改变时会导致obj.work.time改变
+ */
+      //2.   Object.create()   以参数作为原型对象,返回创建的实例对象
+
+      /*     var obj={name:'张三'};
+
+      var newObj=Object.create(obj);
+      console.log(newObj) */
+
+      //3. Object.is()  判断两个值是否相等
+
+      /*  console.log(Object.is(NaN,NaN));  //true
+      console.log(Object.is(+0,-0));   //false */
+
+      // 4. Object.setPrototypeOf  设置对象的原型对象   Object.getPrototypeOf  获取对象的原型对象
+      function Foo() {}
+      var obj = new Foo();
+      console.log(obj.__proto__ == Foo.prototype); //true   不建议使用__proto__
+      console.log(Object.getPrototypeOf(obj) == Foo.prototype); //true  推荐使用Object.gePrototypeOf的方式去获取对象的原型对象
+
+      Object.setPrototypeOf(obj, Array.prototype); //改变obj的原型对象
+      console.log(obj.__proto__ == Foo.prototype); //false
+      console.log(Object.getPrototypeOf(obj) == Foo.prototype); //false
+      console.log(obj.__proto__ == Array.prototype); //true
+      console.log(Object.getPrototypeOf(obj) == Array.prototype); //true
+    </script>
+  </body>
+</html>

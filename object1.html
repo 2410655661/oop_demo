@@ -8,26 +8,25 @@
   </head>
   <body>
     <script>
-      //   var obj = {
-      //     name: "张三"
-      //   };
-      //   Object.defineProperty(obj, "age", {
-      //     //数据描述符
-      //     value: 20,                 //值
-      //     enumerable: false,          //是否可枚举
-      //     writable: false,       //是否可以修改值
-      //     configurable: false   //是否可以修改属性
-      //   });
-      //   for (var attr in obj) {
-      //     console.log(attr);
-      //   }
+      /*    var obj = {
+          name: "张三"
+        };
+        Object.defineProperty(obj, "age", {
+          //数据描述符
+          value: 20,                 //值
+          enumerable: false,          //是否可枚举
+          writable: false,       //是否可以修改值
+          configurable: false   //是否可以修改属性
+        });
+        for (var attr in obj) {
+          console.log(attr);
+        }
 
-      //   delete obj.age;
-      //   console.log(obj);
+        delete obj.age;
+        console.log(obj); */
 
       //   存取描述符
-
-      var obj = { name: "张三" };
+      /*  var obj = { name: "张三" };
       var age = 20;
       Object.defineProperty(obj, "age", {
         get: function() {
@@ -35,13 +34,13 @@
           return age;
         },
         set: function(e) {
-          age=e;
+          age = e;
         },
         configurable: true,
         enumerable: true
       });
       obj.age = 30;
-      console.log(obj.age);
+      console.log(obj.age); */
     </script>
   </body>
 </html>

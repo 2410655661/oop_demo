@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //   // ES6中类的继承
+      /*    class Foo {
+          constructor(x, y) {
+            this.x = x;
+            this.y = y;
+          }
+          sum() {
+            return this.x + this.y;
+          }
+        }
+
+        class Bar extends Foo {}
+        var obj = new Bar(3, 4);
+        console.log(obj.sum()); //7 */
+
+      class Foo {
+        constructor(x, y) {
+          this.x = x;
+          this.y = y;
+        }
+        sum() {
+          return this.x + this.y;
+        }
+      }
+
+      class Bar extends Foo {
+        constructor(x, y, z) {
+          super(x, y);
+          this.z = z;
+        }
+        sum1() {
+          return this.x + this.y + this.z;
+        }
+      }
+      var obj = new Bar(3, 4, 5);
+      console.log(obj);
+      console.log(obj.sum1()); //7
+    </script>
+  </body>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      // 1.hasOwnProperty  查询对象自身是否含有这个属性 返回布尔值
+      /*      function  Foo() {
+             this.name="张三"
+         }
+         Foo.prototype.age=20;
+
+       var obj=new Foo();
+
+       console.log(obj.hasOwnProperty('name'));  //true
+       console.log(obj.hasOwnProperty('age'));  //false  因为age是处于原型链上的 */
+
+      // 2.isPrototypeOf  查询对象是否在指定的原型链上
+
+      /*   function Foo(){
+          this.name='name'
+      }
+      Foo.prototype.age=20;
+      var obj=new Foo();
+      console.log(obj instanceof Foo);    //true
+      console.log(Foo.prototype.isPrototypeOf(obj));  //true */
+
+      // 3. propertyIsEnumerable 判断自身属性可以枚举
+      /*   function Foo(){
+          this.name='name'
+      }
+      Foo.prototype.age=20;
+      var obj=new Foo();
+      Object.defineProperty(obj,'sex',{
+          value:20
+      })
+      console.log(obj.hasOwnProperty('sex'));  //true
+      console.log(obj.propertyIsEnumerable('sex'));//false */
+
+      // 4.toString()  valueOf()
+      /*   Object.prototype.valueOf=function(){
+         return {};
+      }
+
+      var obj={
+          name:'航三'
+      }
+      console.log(obj.toString());  //获取对象的字符串形式
+      console.log(obj.valueOf());   //获取对象的值
+      //对象进行运算操作时,会先调用valueOf()方法,如果返回的是对象时,会继续调用toString() 
+      console.log(1+obj);  //1[object Object] */
+    </script>
+  </body>
+</html>

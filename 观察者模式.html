@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      #div1 {
+        height: 100px;
+        width: 100px;
+        border: 1px solid #000;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="div1"></div>
+    <script>
+      /* 观察者模式(发布订阅模式) 
+           观察者模式中,一个被观察者管理所有相依于它的观察者物件,
+           并且在本身的状态改变时主动发出通知
+        */
+      /*    function Foo() {}
+      Foo.prototype.bind = function(obj, events, fn) {
+        obj.listeners = obj.listeners || {};
+        obj.listeners[events] = obj.listeners[events] || [];
+        obj.listeners[events].push(fn);
+      };
+
+      Foo.prototype.fire = function(obj, event) {
+        for (var i = 0; i < obj.listeners[event].length; i++) {
+          obj.listeners[event][i]();
+        }
+      };
+
+      var obj = new Foo();
+      var div1 = document.getElementById("div1");
+      obj.bind(div1, "show", function() {
+        console.log(1);
+      });
+      obj.bind(div1, "show", function() {
+        console.log(2);
+      });
+      obj.bind(div1, "show", function() {
+        console.log(3);
+      });
+      obj.fire(div1, "show"); */
+
+      //   demo
+
+      var div1 = document.getElementById("div1");
+
+      function Foo() {}
+      Foo.prototype.bind = function(obj, events, fn) {
+        obj.listeners = obj.listeners || {};
+        obj.listeners[events] = obj.listeners[events] || [];
+        obj.listeners[events].push(fn);
+      };
+      Foo.prototype.fire = function(obj, events) {
+        var args = Array.prototype.slice.call(arguments).slice(2);
+        for (var i = 0; i < obj.listeners[events].length; i++) {
+          obj.listeners[events][i].apply(obj, args);
+        }
+      };
+
+      function ScaleMethod(elem) {
+        this.elem = elem;
+        this.scale();
+        this.wheel();
+      }
+      ScaleMethod.prototype.scale = function() {
+        var downX = 0;
+        var downY = 0;
+        var downH = 0;
+        var downW = 0;
+        var _this = this;
+        this.elem.onmousedown = function(ev) {
+          downX = ev.pageX;
+          downY = ev.pageY;
+          downH = _this.elem.offsetHeight;
+          downW = _this.elem.offsetWidth;
+          document.onmousemove = function(ev) {
+            _this.elem.style.width = ev.pageX - downX + downW + "px";
+            _this.elem.style.height = ev.pageY - downY + downH + "px";
+            obj.fire(
+              _this,
+              "scale",
+              _this.elem.offsetWidth,
+              _this.elem.offsetHeight
+            );
+          };
+          document.onmouseup = function() {
+            document.onmousemove = null;
+            document.onmouseup = null;
+          };
+        };
+      };
+
+      ScaleMethod.prototype.wheel = function() {
+        var _this = this;
+        _this.elem.onmousewheel = function(ev) {
+          if (ev.wheelDelta > 0) {
+            this.style.height = this.offsetHeight - 10 + "px";
+          } else {
+            this.style.height = this.offsetHeight + 10 + "px";
+          }
+          obj.fire(
+            _this,
+            "scale",
+            _this.elem.offsetWidth,
+            _this.elem.offsetHeight
+          );
+        };
+      };
+      var obj = new Foo();
+      var s1 = new ScaleMethod(div1);
+      obj.bind(s1, "scale", function(w, h) {
+        div1.innerHTML = w + "," + h;
+      });
+    </script>
+  </body>
+</html>

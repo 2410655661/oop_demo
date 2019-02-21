@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /* 1.简单工厂模式
+           提供一个创建一系列相关对象的入口,统一了对象创建职责,创建对象无需关心具体类
+         2.工厂模式
+           提供一个创建一系列相关对象的入口,统一了对象创建职责,创建对象无需关心具体类
+           区别:使用一个工厂类来进行创建
+         3.抽象工厂模式
+         一个工厂类可以对应多个产品类,对应产生多个实例对象 */
+         //简单工厂模式
+  /*     function Foo() {
+        this.name = "张三";
+      }
+      function Bar() {
+        this.name = "李四";
+      }
+      function Factory(args) {
+        var result;
+        if (args == "foo") {
+          return new Foo();
+        } else if (args == "bar") {
+          return new Bar();
+        }
+        return result;
+      }
+
+      var obj1 = Factory("bar");
+      var obj2 = Factory("foo");
+      console.log(obj1.name, obj2.name); */
+
+
+    //工厂模式
+ /*    function Foo() {
+        this.name = "张三";
+      }
+      function Bar() {
+        this.name = "李四";
+      }
+     function Factory(){}
+
+      Factory.prototype.create=function(args){
+        var result;
+        if (args == "foo") {
+          return result=new Foo();
+        } else if (args == "bar") {
+          return result=new Bar();
+        }
+        return result;
+      }
+
+      var fa =new Factory();
+      var obj1= fa.create('foo')
+      console.log(obj1.name); */
+
+     </script>
+  </body>
+</html>

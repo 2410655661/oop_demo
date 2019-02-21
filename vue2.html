@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link
+      href="https://cdn.bootcss.com/twitter-bootstrap/4.2.1/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="app" class="container jumbotron">
+      <h1>Hello,{{ name }}</h1>
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="任务的内容..."
+          v-model="message"
+        />
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button" @click="add">Go</button>
+        </span>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">当前任务为{{ message }}</div>
+        <ul class="list-group">
+          <li class="list-group-item" v-for="(item,index) in list">
+            {{ index + 1 }}:{{ item.text }}
+            <button class="close" @click="remove(index)">&times;</button>
+          </li>
+        </ul>
+        <div class="panel-footer">任务统计:{{ list.length }}</div>
+      </div>
+    </div>
+    <script>
+      class Vue {
+        constructor(opts) {
+          this.$el = document.querySelector(opts.el);
+          this.$data = opts.data();
+          this.$methods = opts.$methods;
+          this.$temp=this.template(this.$el);
+          this.render(this.$temp)
+          
+        }
+      }
+      Vue.prototype.template = function(elem) {
+        var code = "var r=[];\n";
+        var re_exp = /([^{]*)\{\{\s*([^}]+)\s*\}\}([^{]*)/g;
+        var re_tag = /(<([^>]+)>)/g;
+        var re_vFor = /\((\w+),(\w+)\)\sin\s(\w+)/;
+        function gets(elem, childFlag) {
+          var childElems = elem.childNodes;
+         
+          for (var i = 0; i < childElems.length; i++) {
+            if(childElems[i].nodeType==3){
+                var str=childElems[i].nodeValue.toString().trim();
+                if(re_exp.test(str)){
+                    code+=str.replace(re_exp,function($0,$1,$2,$3){
+                        if(childFlag){
+                            return 'r.push(\''+$1+'\');\nr.push('+$2+');\nr.push(\''+$3+'\');\n';
+                        }else{
+                            return 'r.push(\''+$1+'\');\nr.push(data.'+$2+');\nr.push(\''+$3+'\');\n';
+                        }
+                    })
+                }else{
+                    code+='r.push(\''+str+'\');';
+                }
+            }else if(childElems[i].nodeType==3){
+                if(childElems[i].getAttribute('v-for')){
+                    var vFor=childElems[i].getAttribute('v-for');
+                    var vForAttrs=vFor.match(re_vFor);
+                    childElems[i].removeAttribute('v-for');
+                    var tags=childElems[i].outerHTML.match(re_tag);
+                    code+='data.'+vForAttrs[3]+'.forEach(function('+vForAttrs[1]+','+vForAttrs[2]+'){\n';
+                    if(tags[0].include('(')){
+                        code+='r.push(\''+tags[0].substring(0,tags[0].indexOf('(')+1)+'\');\n';
+                        code+='r.push('+tags[0].substring(tags[0].indexOf('(')+1,tags[0].indexOf(')'))+');\n';
+                        code+='r.push(\''+tags[0].substring(tags[0].indexOf(')'))+'\');\n';
+                    }else{
+                        code+='r.push(\''+tags[0]+'\');\n';
+                    }
+                    gets(childElems[i],true);
+                    if(tags[1]){
+                        code+='r.push(\''+tags[tags.length-1]+'\';\n';
+                    }
+                    code+='});\n';
+                }else{
+                    var tags=childElems[i].outerHTML.match(re_tag);
+                    if(tags[0].include('(')){
+                        code+='r.push(\''+tags[0].substring(0,tags[0].indexOf('(')+1)+'\');\n';
+                        code+='r.push('+tags[0].substring(tags[0].indexOf('(')+1,tags[0].indexOf(')'))+');\n';
+                        code+='r.push(\''+tags[0].substring(tags[0].indexOf(')'))+'\');\n';
+                    }else{
+                        code+='r.push(\''+tags[0]+'\');\n';
+                    }
+                    gets(childElems[i],true);
+                    if(tags[1]){
+                        code+='r.push(\''+tags[tags.length-1]+'\';\n';
+                    }
+                }
+            }
+
+          }
+         
+          return code;
+        }
+        return gets(elem)+'return r.join(\'\');';
+      };
+      Vue.prototype.render = function(temp) {
+        var fn = new Function("data", temp);
+        this.$el.innerHTML = fn(this.$data);
+      };
+      var vm = new Vue({
+        el: "#app",
+        data() {
+          return {
+            message: "TodoList",
+            name: "TodoList",
+            list: [{ text: "1" }, { text: "2" }, { text: "3" }]
+          };
+        }
+      });
+      console.log(vm)
+    </script>
+  </body>
+</html>

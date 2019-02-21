@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+  </head>
+  <body>
+    <script>
+      /*   var Foo = function() {};
+      var Bar = function() {};
+      var Baz = function() {};
+
+      var obj1 = new Foo();
+      var obj2 = new Bar();
+      var obj3 = new Baz(); */
+
+      //外观模式
+      /* var Foo = function() {};
+      var Bar = function() {};
+      var Baz = function() {};
+
+      function Facede() {
+        var obj1 = new Foo();
+        var obj2 = new Bar();
+        var obj3 = new Baz();
+      }
+      new Facede(); */
+
+      //   演示
+      function Sum(num) {
+        this.num = num;
+      }
+      Sum.prototype.show = function() {
+        this.add();
+        this.toString();
+        this.alert();
+      };
+      Sum.prototype.alert = function() {
+        console.log(this.num);
+      };
+      Sum.prototype.add = function() {
+        this.num++;
+      };
+      Sum.prototype.toString = function() {
+        this.num = this.num.toString();
+      };
+
+      var s = new Sum(5);
+      s.show(); //直接调用高层接口同
+    </script>
+  </body>
+</html>

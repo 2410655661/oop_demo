@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /* 递归概念:
+        函数可以自己调用自己,成为递归调用
+        [注] 我们可以写出递归,但是我们并不知道他是如何得出结果的
+
+        函数的递归调用
+        方法:
+            1.首先去找临界点,既无需计算,获得的值;
+            2.找这一次与上一次的关系
+            3.假设当前函数已经可以使用了,调用自身计算上一次的运行结果,再写出这次的运行结果
+            [特点]
+            1.必须有参数
+            2.必须有return
+
+            1加到n的和.  sum(100)=sum(99)+100;
+                         sum(n)=sum(n-1)+n;
+
+            [注] 递归会在短时间内,使内存剧增;
+    //          */
+      //   function sum(n) {
+      //     if (n == 1) {
+      //       return 1;
+      //     } else {
+      //       return sum(n - 1) + n;
+      //     }
+      //   }
+      //   alert(sum(12556));
+
+      //   function print(n) {
+      //     if (n == 0) {
+      //       return;
+      //     } else {
+      //       document.write("hellowold<br />");
+      //       return print(n - 1);
+      //     }
+      //   }
+      //   print(5);
+
+      function rabbit(n) {
+        if (n < 4) {
+          return 1;
+        }
+        return rabbit(n - 3) + rabbit(n - 1);
+      }
+      console.log(rabbit(10));
+    </script>
+  </body>
+</html>

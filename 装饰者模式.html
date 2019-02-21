@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      //装饰者模式
+      //动态给一个对象添加一些额外的职责,对结果进行进一步的装饰.
+      function Foo() {
+        this.name = "张三";
+      }
+      function Bar(name) {
+        this.name = name + "!!!";
+      }
+      function Baz(name) {
+        this.name = "hello" + name;
+      }
+      var obj = new Foo();
+      var obj1 = new Bar(obj.name);
+      var obj2 = new Baz(obj1.name);
+      console.log(obj2.name);
+    </script>
+  </body>
+</html>

@@ -24,28 +24,27 @@
           configurable: true
         }
       });
-    //   seal吧对象中所有的属性的configurable都设置为false, 对象就不能执行属性的操作
-    //    Object.isSealed(obj);  来判断对象是否被禁止对象配置操作 返回布尔值
-    //   Object.seal(obj);
-    //   delete obj.name;
-    //   obj.name = "hi";
-    //   console.log(Object.getOwnPropertyDescriptors(obj));
-    //   console.log(Object.isSealed(obj));
+      //   seal吧对象中所有的属性的configurable都设置为false, 对象就不能执行属性的操作
+      //    Object.isSealed(obj);  来判断对象是否被禁止对象配置操作 返回布尔值
+      //   Object.seal(obj);
+      //   delete obj.name;
+      //   obj.name = "hi";
+      //   console.log(Object.getOwnPropertyDescriptors(obj));
+      //   console.log(Object.isSealed(obj));
 
-    // freeze会把对象中所有的属性的configurable和writable都设置为false  对象不能执行属性的操作与值的修改
-    // Object.isFrozen(obj)   来判断对象是否被冻结       返回布尔值
-        //  Object.freeze(obj);
-        // obj.name="刘";
-        // console.log(Object.isFrozen(obj));
-        // console.log(Object.getOwnPropertyDescriptors(obj));
+      // freeze会把对象中所有的属性的configurable和writable都设置为false  对象不能执行属性的操作与值的修改
+      // Object.isFrozen(obj)   来判断对象是否被冻结       返回布尔值
+      //  Object.freeze(obj);
+      // obj.name="刘";
+      // console.log(Object.isFrozen(obj));
+      // console.log(Object.getOwnPropertyDescriptors(obj));
 
-      //preventExtensions 禁止对象扩展,对象可以删除属性,但不能添加    
+      //preventExtensions 禁止对象扩展,对象可以删除属性,但不能添加
       //Object.isExtensible(obj)  判断对象是否可以扩展   返回布尔值
       // Object.preventExtensions(obj);
       // delete obj.name;
       // obj.job="it";
       // console.log(Object.isExtensible(obj));
-
     </script>
   </body>
 </html>

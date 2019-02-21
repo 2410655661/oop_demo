@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <link
+      href="https://cdn.bootcss.com/twitter-bootstrap/4.2.1/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div id="app" class="container jumbotron">
+      <h1>Hello,{{ name }}</h1>
+      <div class="input-group">
+        <input
+          type="text"
+          class="form-control"
+          placeholder="任务的内容..."
+          v-model="message"
+        />
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button" @click="add">Go</button>
+        </span>
+      </div>
+      <div class="panel panel-default">
+        <div class="panel-heading">当前任务为{{ message }}</div>
+        <ul class="list-group">
+          <li class="list-group-item" v-for="(item,index) in list">
+            {{ index + 1 }}:{{ item.text }}
+            <button class="close" @click="remove(index)">&times;</button>
+          </li>
+        </ul>
+        <div class="panel-footer">任务统计:{{ list.length }}</div>
+      </div>
+    </div>
+    <script>
+      class Vue {
+        constructor(opts) {
+          this.$el = document.querySelector(opts.el);
+          this.$data = opts.data();
+          this.$methods = opts.$methods;
+          this.template(this.$data);
+        }
+      }
+      Vue.prototype.template = function(data) {
+        console.log(data);
+        var code = `
+       var r = [];
+        r.push("<h1>Hello," + data.name + "</h1>");
+        r.push('<div class="input-group">');
+        r.push(
+          '<input type="text" class="form-control" placeholder="任务的内容..." v-model="message"/>'
+        );
+        r.push('<span class="input-group-btn">');
+        r.push(
+          ' <button class="btn btn-default" type="button" @click="add">Go</button>'
+        );
+        r.push("</span>");
+        r.push("</div>");
+        r.push('<div class="panel panel-default">');
+        r.push(
+          ' <div class="panel-heading">当前任务为' + data.message + "</div>"
+        );
+        r.push('<ul class="list-group">');
+        data.list.forEach(function(item, index) {
+          r.push(
+            '<li class="list-group-item">' +
+              (index + 1) +
+              ":" +
+              item.text +
+              '<button class="close" @click="remove(index)">&times;</button> </li>'
+          );
+        });
+        r.push("</ul>");
+        r.push(
+          '<div class="panel-footer">任务统计:' + data.list.length +'</div>'
+        );
+        r.push("</div>");
+        return r.join("");
+        `;
+
+        var foo = new Function("data", code);
+        this.$el.innerHTML = foo(data);
+      };
+
+      var vm = new Vue({
+        el: "#app",
+        data() {
+          return {
+            message: "TodoList",
+            name: "TodoList",
+            list: [{ text: "1" }, { text: "2" }, { text: "3" }]
+          };
+        }
+      });
+    </script>
+  </body>
+</html>

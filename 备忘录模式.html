@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+    <style>
+      .box {
+        height: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="box"><div id="tip">*</div></div>
+    <input type="text" id="inp" />
+    <script>
+      /* 备忘录模式
+    在不破坏封装性的前提下,捕获一个对象的内部状态,并在该对象之外保存这个状态.这样就可以将该对象恢复到原先保存的状态
+     */
+
+      /* function Originator() {
+        this.state = "";
+        this.memento = new Memento();
+      }
+      Originator.prototype.getState = function() {
+        return this.state;
+      };
+      Originator.prototype.setState = function(state) {
+        this.state = state;
+      };
+      Originator.prototype.createMemento = function() {
+        this.memento.setMemento(this.state);
+      };
+      Originator.prototype.restoreMemento = function() {
+        this.setState(this.memento.getMemento());
+      };
+      //用Menento的中state记录数据
+      function Memento() {
+        this.state = [];
+      }
+      Memento.prototype.setMemento = function(state) {
+        this.state.push(state);
+      };
+      Memento.prototype.getMemento = function() {
+        return this.state.pop()||"";
+      };
+
+      var o1 = new Originator();
+      o1.setState("状态1");
+      console.log("初始状态:" + o1.getState());
+
+      o1.createMemento();
+      o1.setState("状态2");
+      console.log("改变后的状态:" + o1.getState());
+      o1.createMemento();
+
+      o1.setState("状态3");
+      console.log("改变后的状态:" + o1.getState());
+
+      o1.restoreMemento();
+      console.log("恢复后的状态:" + o1.getState());
+
+      o1.restoreMemento();
+      console.log("恢复后的状态:" + o1.getState()); */
+
+      //实现撤销功能
+
+      function Originator(params) {
+        this.value = "";
+        this.memento = new Memento();
+      }
+      Originator.prototype.setState = function(value) {
+        this.value = value;
+      };
+      Originator.prototype.getState = function() {
+        return this.value;
+      };
+      Originator.prototype.createMemento = function() {
+        this.memento.setMemento(this.value);
+      };
+      Originator.prototype.remoteMenento = function() {
+        this.setState(this.memento.getMemento());
+      };
+
+      function Memento() {
+        this.state = [];
+      }
+      Memento.prototype.setMemento = function(state) {
+        this.state.push(state);
+      };
+      Memento.prototype.getMemento = function() {
+        return this.state.pop() || "";
+      };
+
+      var inp = document.getElementById("inp");
+      var tip = document.getElementById("tip");
+      var o1 = new Originator();
+      inp.onkeydown = function(ev) {
+        if (ev.altKey && ev.keyCode == 83) {
+          tip.style.display = "none";
+          o1.createMemento();
+          o1.setState(this.value);
+        } else if (ev.altKey && ev.keyCode == 90) {
+          o1.remoteMenento();
+          this.value = o1.getState();
+        }
+      };
+      inp.oninput = function() {
+        tip.style.display = "block";
+      };
+    </script>
+  </body>
+</html>

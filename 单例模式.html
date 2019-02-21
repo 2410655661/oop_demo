@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /*    function Bar() {
+          this.name = "hello";
+        }
+
+        var obj1 = new Bar();
+        var obj2 = new Bar();
+        console.log(obj1 == obj2); //false
+
+      单例模式
+        function Bar() {
+          if (!Bar._instance) {
+            Bar._instance = {
+              name: "hello"
+            };
+          }
+          return Bar._instance;
+        }
+        var obj1 = new Bar(); //第一次实例化时候去创建Bar._instance
+        var obj2 = new Bar(); //第二次实例化时候直接就获取Bar._instance
+        console.log(obj1 == obj2); //true */
+
+      /*  function Baz() {
+        if (!Baz._instance) {
+          Baz._instance = {
+            logs: [],
+            print: function() {
+              var _this = this;
+              var timer = setInterval(function() {
+                var log = _this.logs.shift();
+                if (log) {
+                  console.log(log);
+                } else {
+                  clearInterval(timer);
+                }
+              });
+            },
+            add: function(log) {
+              this.logs.push(log);
+            }
+          };
+        }
+        return Baz._instance;
+      }
+
+      var arr = ["这是第一条日志", "这是第二条日志", "这是第三条日志"];
+
+      for (var i = 0; i < arr.length; i++) {
+        var obj = new Baz();
+        obj.add(arr[i]);
+      }
+
+      var obj = new Baz();
+      obj.print(); */
+    </script>
+  </body>
+</html>

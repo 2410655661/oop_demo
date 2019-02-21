@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+    <title>Document</title>
+  </head>
+  <body>
+    <script>
+      /* 适配器模式:
+        将一个类的接口转换成客户希望的另一个接口,使得原本由于接口不兼容而不能一起工作的那些类可以在一起工作
+         */
+      /* function Foo() {
+        this.show = Adapter(Bar, "show"); //通过适配器使两项插头支持三项插头的功能
+      }
+      function Bar() {}
+
+      Foo.prototype.show = function() {
+        console.log("两项插头");
+      };
+      Bar.prototype.show = function() {
+        console.log("三项插头");
+      };
+      function Adapter(class1, method) {
+        return class1.prototype[method];
+      }
+
+      var obj = new Foo();
+      obj.show(); */
+      //练习
+      function Adapter(class1, method) {
+        return class1.prototype[method];
+      }
+      function Page() {
+        var screen = window.innerWidth < 800 ? "small" : "large";
+        if (screen == "small") {
+          this.show = Adapter(SmallPage, "show");
+        }
+      }
+      function SmallPage() {}
+      Page.prototype.show = function() {
+        console.log("大屏显示");
+      };
+      SmallPage.prototype.show = function() {
+        console.log("小屏显示");
+      };
+
+      var page = new Page();
+      page.show();
+    </script>
+  </body>
+</html>
